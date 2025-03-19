@@ -1,8 +1,8 @@
-import dotenv from 'dotenv'
+
 import mongoose from 'mongoose'
 
 //Using dotenv to access Environmental varialbles
-dotenv.config();
+
 
 //Function To Connect with Datatbase
 const connectDb = () =>{
