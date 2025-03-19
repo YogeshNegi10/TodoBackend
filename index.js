@@ -21,8 +21,8 @@ connectDb()
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors())
-app.use("/user",userRouter);
-app.use("/task",taskRouter);
+app.use("api/v1/user",userRouter);
+app.use("api/v1/task",taskRouter);
 
 // Usinging ErrorMiddleware
 app.use(ErrorMsge)
