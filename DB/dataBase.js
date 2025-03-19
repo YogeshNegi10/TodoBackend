@@ -10,7 +10,7 @@ const connectDb = () =>{
    mongoose.connect(process.env.MONGO_URI,{
       dbName:'TodoApi',
     }).then(()=>{
-        console.log('DB Connected..')
+        console.log(`DB Connected... `)
     }).catch((err)=>{
         console.log(err)
     })
