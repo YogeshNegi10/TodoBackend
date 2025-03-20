@@ -32,6 +32,10 @@ app.use("/api/v1/task",taskRouter);
 app.use(ErrorMsge)
 
 
+app.get('/',(req,res)=>{
+      res.send('Api is working...')
+})
+
 app.listen(process.env.PORT,()=>{
    try {
         console.log(`Server is Listening on Port : ${process.env.PORT}`)
