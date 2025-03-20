@@ -29,9 +29,7 @@ export const createUser = async (req, res,next) => {
 
   } catch (error) {
      
-       res.send({
-        message:error
-       })
+      next(error)
   }
   
   
@@ -56,7 +54,7 @@ export const loginUser = async (req, res,next) => {
       if (!IsMatched)  return next(new ErrorHandler('Incorrect password..',404))
 
         
-       sendCookie(user,res,'Logged In...',200);
+       sendCookie(user,res,`Welcome Back, ${user.name}`,200);
 
     }
   } catch (error) {
