@@ -10,8 +10,8 @@ import jwt from "jsonwebtoken";
    res.status(statusCode).cookie("token", token, {
       expires: new Date(Date.now() + 1000 * 1000),
       httpOnly: true,
-      // sameSite:"none",
-      // secure:true
+      sameSite:"none",
+      secure:true
    }).json({
       success:true,
       message:message
