@@ -4,10 +4,11 @@ import ErrorHandler from "../utils/error.js";
 // Function to Add New Task or Todo..
 
 export const addTask = async (req, res,next) => {
+  
   try {
     const { title, description } = req.body;
 
-    if (title && description === "") return next(new ErrorHandler('Title and description is required.',403))
+    if (title || description === "") return next(new ErrorHandler('All fields are required.',403))
 
     await Todo.create({
       title,
