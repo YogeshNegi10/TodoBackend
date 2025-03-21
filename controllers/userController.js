@@ -14,7 +14,7 @@ export const createUser = async (req, res,next) => {
 
     let user = await User.findOne({email})
 
-    if(user)  return next(new ErrorHandler('Email Already Exists..',404))
+    if(user)  return next(new ErrorHandler('Email Already Exists!',404))
 
   const hashpassword = await bcrypt.hash(password, 10);
 
@@ -25,7 +25,7 @@ export const createUser = async (req, res,next) => {
     password: hashpassword,
   });
 
-  sendCookie(user,res,"User Created....",201);
+  sendCookie(user,res,"Registered Successfully!",201);
 
   } catch (error) {
      
@@ -45,13 +45,14 @@ export const loginUser = async (req, res,next) => {
     const user = await User.findOne({ email });
   
     if (!user) {
-      return next(new ErrorHandler('Register First',404))
+
+      return next(new ErrorHandler('Register First Please!',404))
   
     } else {
   
       const IsMatched = await bcrypt.compare(password, user.password) ;
 
-      if (!IsMatched)  return next(new ErrorHandler('Incorrect Email and Password..',404))
+      if (!IsMatched)  return next(new ErrorHandler('Incorrect Email Or Password!',404))
 
        if(IsMatched){
            actualPassword = password
@@ -79,7 +80,7 @@ export const logOut = (req,res) =>{
 
   res.status(200).json({
     success:true,
-    message: "Logged Out...",
+    message: "Logged Out Sucessfully!",
   });
 
 }
@@ -90,9 +91,9 @@ export const logOut = (req,res) =>{
 export const getMyDetails = (req,res) =>{
 
 
-      res.status(201).json({
+      res.status(200).json({
         sucess:true,
-        message:"User Fetched...",
+        message:"User Fetched Successfully!",
         user:req.user 
       })
 }

@@ -7,6 +7,8 @@ export const addTask = async (req, res,next) => {
   try {
     const { title, description } = req.body;
 
+    if (title && description === "") return next(new ErrorHandler('Title and description is required.',403))
+
     await Todo.create({
       title,
       description,
@@ -15,7 +17,7 @@ export const addTask = async (req, res,next) => {
 
     res.status(201).json({
       sucess:true,
-      message: "task Created...",
+      message: "task Created successfully!",
     });
 
   } catch (error) {
@@ -31,8 +33,8 @@ export const getMyTask = async (req, res,next) => {
 
     const tasks = await Todo.find({ user: id });
 
-    res.status(201).json({
-      message: "your Task....",
+    res.status(200).json({
+      message: "Your Task!",
       tasks,
     });
 
@@ -50,16 +52,16 @@ export const updateTask = async (req, res,next) => {
     const task = await Todo.findById(id);
 
     if (!task)
-      return next(new ErrorHandler('Invalid Id...',404))
+      return next(new ErrorHandler('Invalid Id!',404))
 
     task.iscompleted = !task.iscompleted;
 
     await task.save();
     // await Todo.updateOne({ _id: id, iscompleted });
 
-    res.status(201).json({
+    res.status(200).json({
       sucess:true,
-      message: "Task Updated....",
+      message: "Task Updated successfully!",
     });
   } catch (error) {
     next(error)
@@ -74,13 +76,13 @@ export const deleteTask = async (req, res, next) => {
 
     const task = await Todo.findById(id);
 
-    if (!task) return next(new ErrorHandler('Invalid Id...',404))
+    if (!task) return next(new ErrorHandler('Invalid Id!',404))
 
      await task.deleteOne()
 
     res.status(200).json({
       sucess:true,
-      message: "Task Deleted....",
+      message: "Task Deleted successfully!.",
     });
 
   } catch (error) {
