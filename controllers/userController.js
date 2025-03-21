@@ -3,7 +3,7 @@ import { User } from "../modals/userModal.js";
 import sendCookie from "../utils/features.js";
 import ErrorHandler from "../utils/error.js";
 
-
+export let actualPassword = '';
 
 // Function for creating User..
 
@@ -49,11 +49,13 @@ export const loginUser = async (req, res,next) => {
   
     } else {
   
-      const IsMatched = await bcrypt.compare(password, user.password);
-  
-      if (!IsMatched)  return next(new ErrorHandler('Incorrect password..',404))
+      const IsMatched = await bcrypt.compare(password, user.password) ;
 
-        
+      if (!IsMatched)  return next(new ErrorHandler('Incorrect Email and Password..',404))
+
+       if(IsMatched){
+           actualPassword = password
+       }
        sendCookie(user,res,`Welcome Back, ${user.name}`,200);
 
     }
