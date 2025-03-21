@@ -7,20 +7,16 @@ export let actualPassword = '';
 
 // Function for creating User..
 
-export const createUser = async (req, res,next) => {
+export const createUser = async (req, res, next) => {
 
   try {
     const { name, email, password } = req.body;
-
-    if(email || name || password === '') return  next(new ErrorHandler('All fields are required.',403))
 
     let user = await User.findOne({email})
 
     if(user)  return next(new ErrorHandler('Email Already Exists!',404))
 
   const hashpassword = await bcrypt.hash(password, 10);
-
-
     user = await User.create({
     name,
     email,
@@ -44,8 +40,6 @@ export const loginUser = async (req, res,next) => {
   try {
 
     const { email, password } = req.body;
-
-   if (title || description === "") return next(new ErrorHandler('All fields are required.',403))
 
     const user = await User.findOne({ email });
   

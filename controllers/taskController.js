@@ -8,7 +8,6 @@ export const addTask = async (req, res,next) => {
   try {
     const { title, description } = req.body;
 
-    if (title || description === "") return next(new ErrorHandler('All fields are required.',403))
 
     await Todo.create({
       title,
