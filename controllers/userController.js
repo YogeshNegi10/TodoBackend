@@ -12,6 +12,8 @@ export const createUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
+    if(password =="") return next(new ErrorHandler('You must Enter Your Password!',404))
+
     let user = await User.findOne({email})
 
     if(user)  return next(new ErrorHandler('Email Already Exists!',404))
@@ -74,6 +76,8 @@ export const logOut = (req,res) =>{
     res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
+    sameSite:"none",
+    secure:true
   });
 
 

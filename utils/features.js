@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 
    
    res.status(statusCode).cookie("token", token, {
-      expires: new Date(Date.now() + 1000 * 1000),
+      expires: new Date(Date.now() + 1500 * 1000),
       httpOnly: true,
       sameSite:"none",
       secure:true
