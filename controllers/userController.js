@@ -12,7 +12,6 @@ export const createUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
-    if(password =="") return next(new ErrorHandler('You must Enter Your Password!',404))
 
     let user = await User.findOne({email})
 
